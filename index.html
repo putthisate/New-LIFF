@@ -6,15 +6,37 @@
   <title>My LIFF app</title>
 </head>
 <body>
-  <img id="pictureUrl">
-  <p id="userId"><b>userId:</b></p>
-  <p id="displayName"><b>displayName:</b></p>
 
-  <button id="btnSend" onclick="sendMsg()">Send Message</button>
-  <button id="btnClose" onclick="closed()">Close</button>
+  <form id="booking-form">
+    <label for="customer-name">Customer Name:</label><br>
+    <input type="text" id="customer-name" required><br><br>
+    
+    <label for="mobile-phone">Mobile Phone:</label><br>
+    <input type="text" id="mobile-phone" required pattern="[0-9]{10}" title="Please enter a 10-digit phone number"><br><br>
+    
+    <label for="date">Date:</label><br>
+    <input type="date" id="date" required><br><br>
+    
+    <label for="time">Time:</label><br>
+    <input type="time" id="time" required><br><br>
+    
+    <button type="button" onclick="sendBooking()">Send Booking</button>
+    <button type="button" onclick="closed()">Close</button>
+  </form>
+
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
+    function sendBooking() {
+      const customerName = document.getElementById("customer-name").value;
+      const mobilePhone = document.getElementById("mobile-phone").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      
+      // Example: Send the booking details to a server or perform other actions
+      alert(`Booking details:\nCustomer Name: ${customerName}\nMobile Phone: ${mobilePhone}\nDate: ${date}\nTime: ${time}`);
+    }
+<!--   <script>
     async function sendMsg() {
       if (liff.getContext.type !== "none") {
         await liff.sendMessages([
@@ -26,7 +48,7 @@
         ]);
         alert("Message sent");
       }
-    }
+    } -->
 
     function closed() {
       liff.closeWindow();
