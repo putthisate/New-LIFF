@@ -31,8 +31,33 @@
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
       
-      // Display alert message
-      alert('Booking data: \nCustomer Name: ' + customerName + '\nMobile Phone: ' + mobilePhone + '\nDate: ' + date + '\nTime: ' + time);
+      // Create JSON object with booking data
+      const bookingData = {
+        customerName: customerName,
+        mobilePhone: mobilePhone,
+        date: date,
+        time: time
+      };
+
+      // Make HTTP POST request to Google Apps Script endpoint
+      fetch('YOUR_GOOGLE_APPS_SCRIPT_ENDPOINT', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookingData)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Booking submitted successfully!');
+        } else {
+          throw new Error('Failed to submit booking.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to submit booking. Please try again later.');
+      });
     }
 
     function closed() {
@@ -46,3 +71,4 @@
   </script>
 </body>
 </html>
+
