@@ -31,8 +31,44 @@
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
       
-      // Example: Send the booking details to a server or perform other actions
-      alert(`Booking details:\nCustomer Name: ${customerName}\nMobile Phone: ${mobilePhone}\nDate: ${date}\nTime: ${time}`);
+      // Get user profile
+      liff.getProfile()
+        .then(profile => {
+          // Send booking data and user profile to the server or perform other actions
+          const bookingData = {
+            customerName: customerName,
+            mobilePhone: mobilePhone,
+            date: date,
+            time: time,
+            userId: profile.userId,
+            displayName: profile.displayName,
+            pictureUrl: profile.pictureUrl
+          };
+          
+          // Example: Send booking data and user profile to the server using fetch API
+          fetch('YOUR_SERVER_ENDPOINT', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+          })
+          .then(response => {
+            if (response.ok) {
+              alert('Booking submitted successfully!');
+            } else {
+              throw new Error('Failed to submit booking.');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to submit booking. Please try again later.');
+          });
+        })
+        .catch(error => {
+          console.error('Error getting profile:', error);
+          alert('Failed to get user profile.');
+        });
     }
 
     function closed() {
