@@ -18,6 +18,10 @@
     
     <label for="time">Time:</label><br>
     <input type="time" id="time" required><br><br>
+
+    <input type="hidden" id="userId" value=""><br><br> <!-- Add hidden input for userId -->
+    <input type="hidden" id="displayName" value=""><br><br> <!-- Add hidden input for displayName -->
+    <input type="hidden" id="pictureUrl" value=""><br><br> <!-- Add hidden input for pictureUrl -->
     
     <button type="button" onclick="sendBooking()">Send Booking</button>
     <button type="button" onclick="closed()">Close</button>
@@ -30,6 +34,9 @@
       const mobilePhone = document.getElementById("mobile-phone").value;
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
+      const userId = document.getElementById("userId").value;
+      const displayName = document.getElementById("displayName").value;
+      const pictureUrl = document.getElementById("pictureUrl").value;
       
       // Get user profile
       liff.getProfile()
@@ -46,7 +53,7 @@
           };
           
           // Example: Send booking data and user profile to the server using fetch API
-          fetch('YOUR_SERVER_ENDPOINT', {
+          fetch('https://script.google.com/macros/s/AKfycbyVWLybvsAl3uuupSedhmL29B1CEG3VpZe-YCmj_deWUsCM_zXjmlH-5DC3i119jKBA9g/exec', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
