@@ -6,7 +6,6 @@
   <title>My LIFF app</title>
 </head>
 <body>
-
   <form id="booking-form">
     <label for="customer-name">Customer Name:</label><br>
     <input type="text" id="customer-name" required><br><br>
@@ -24,7 +23,6 @@
     <button type="button" onclick="closed()">Close</button>
   </form>
 
-
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     function sendBooking() {
@@ -36,34 +34,13 @@
       // Example: Send the booking details to a server or perform other actions
       alert(`Booking details:\nCustomer Name: ${customerName}\nMobile Phone: ${mobilePhone}\nDate: ${date}\nTime: ${time}`);
     }
-<!--   <script>
-    async function sendMsg() {
-      if (liff.getContext.type !== "none") {
-        await liff.sendMessages([
-          {
-            "type": "sticker",
-            "stickerId": 1,
-            "packageId": 1
-          }
-        ]);
-        alert("Message sent");
-      }
-    } -->
 
     function closed() {
       liff.closeWindow();
     }
 
-    async function getUserProfile() {
-      const profile = await liff.getProfile();
-      document.getElementById("pictureUrl").src = profile.pictureUrl;
-      document.getElementById("userId").innerText = "userId: " + profile.userId;
-      document.getElementById("displayName").innerText = "displayName: " + profile.displayName;
-    }
-
     async function main() {
       await liff.init({ liffId: "2003321958-53lbdArj" });
-      getUserProfile();
     }
     main();
   </script>
